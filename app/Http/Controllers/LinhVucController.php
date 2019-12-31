@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\LinhVuc;
+use App\linh_vuc;
 use App\Http\Requests\LinhVucRequest;
 use App\Http\Requests\UpDateLinhVucReQuest;
 class LinhVucController extends Controller
@@ -15,7 +15,7 @@ class LinhVucController extends Controller
      */
     public function index()
     {
-        $listLinhVuc = LinhVuc::all();
+        $listLinhVuc = linh_vuc::all();
         return view('linh-vuc.danh-sach', compact('listLinhVuc'));
     }
 
@@ -37,7 +37,7 @@ class LinhVucController extends Controller
      */
     public function store(LinhVucRequest $request)
     {
-        $linhVuc = new LinhVuc;
+        $linhVuc = new linh_vuc;
         $linhVuc->ten_linh_vuc = $request->ten_linh_vuc;
         $linhVuc->save();
 
@@ -63,7 +63,7 @@ class LinhVucController extends Controller
      */
     public function edit($id)
     {
-        $linhVuc = LinhVuc::find($id);
+        $linhVuc = linh_vuc::find($id);
         return view('linh-vuc.form', compact('linhVuc'));
     }
 
@@ -76,7 +76,7 @@ class LinhVucController extends Controller
      */
     public function update(UpDateLinhVucReQuest $request, $id)
     {
-        $linhVuc = linhVuc::find($id);
+        $linhVuc = linh_vuc::find($id);
         $linhVuc ->ten_linh_vuc = $request->ten_linh_vuc;
         $linhVuc ->save();
 
@@ -91,7 +91,7 @@ class LinhVucController extends Controller
      */
     public function destroy($id)
     {
-        $linhVuc = LinhVuc::find($id);
+        $linhVuc = linh_vuc::find($id);
         $linhVuc->delete();
 
         return redirect()->route('linh-vuc.danh-sach')->with(['flash_message'=>'Xóa lĩnh vực thành công!']);

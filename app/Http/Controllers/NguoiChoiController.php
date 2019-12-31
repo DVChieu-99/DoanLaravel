@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\NguoiChoi;
+use App\nguoi_choi;
 
 class NguoiChoiController extends Controller
 {
@@ -14,7 +14,7 @@ class NguoiChoiController extends Controller
      */
     public function index()
     {
-        $listNguoiChoi = NguoiChoi::all();
+        $listNguoiChoi = nguoi_choi::all();
         return view('NguoiChoi.danh-sach', compact('listNguoiChoi'));
     }
 
@@ -36,7 +36,7 @@ class NguoiChoiController extends Controller
      */
     public function store(Request $request)
     {
-        $NguoiChoi=new NguoiChoi;
+        $NguoiChoi=new nguoi_choi;
         $NguoiChoi->ten_dang_nhap=$request->ten_dang_nhap;
         $NguoiChoi->mat_khau=$request->mat_khau;
         $NguoiChoi->mail=$request->mail;
@@ -66,7 +66,7 @@ class NguoiChoiController extends Controller
      */
     public function edit($id)
     {
-        $NguoiChoi = NguoiChoi::find($id);
+        $NguoiChoi = nguoi_choi::find($id);
         return view('NguoiChoi.form', compact('NguoiChoi'));
     }
 
@@ -79,7 +79,7 @@ class NguoiChoiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $NguoiChoi = NguoiChoi::find($id);
+        $NguoiChoi = nguoi_choi::find($id);
         $NguoiChoi->ten_dang_nhap=$request->ten_dang_nhap;
         $NguoiChoi->mat_khau=$request->mat_khau;
         $NguoiChoi->mail=$request->mail;
@@ -99,7 +99,7 @@ class NguoiChoiController extends Controller
      */
     public function destroy($id)
     {
-        $NguoiChoi = NguoiChoi::find($id);
+        $NguoiChoi = nguoi_choi::find($id);
         $NguoiChoi->delete();
 
         return redirect()->route('NguoiChoi.danh-sach')->with(['flash_message'=>'Xóa người chơi thành công!']);

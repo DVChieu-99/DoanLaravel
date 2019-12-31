@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ChiTietLuotChoi;
+use App\chi_tiet_luot_choi;
 
 class ChiTietLuotChoiController extends Controller
 {
@@ -14,7 +14,7 @@ class ChiTietLuotChoiController extends Controller
      */
     public function index()
     {
-        $listChiTietLuotChoi = ChiTietLuotChoi::all();
+        $listChiTietLuotChoi = chi_tiet_luot_choi::all();
         return view('ChiTietLuotChoi.danh-sach', compact('listChiTietLuotChoi'));
     }
 
@@ -36,7 +36,7 @@ class ChiTietLuotChoiController extends Controller
      */
     public function store(Request $request)
     {
-        $ChiTietLuotChoi=new ChiTietLuotChoi;
+        $ChiTietLuotChoi=new chi_tiet_luot_choi;
         $ChiTietLuotChoi->luot_choi_id=$request->luot_choi_id;
         $ChiTietLuotChoi->cau_hoi_id=$request->cau_hoi_id;
         $ChiTietLuotChoi->phuong_an=$request->phuong_an;
@@ -64,7 +64,7 @@ class ChiTietLuotChoiController extends Controller
      */
     public function edit($id)
     {
-        $ChiTietLuotChoi=ChiTietLuotChoi::find($id);
+        $ChiTietLuotChoi=chi_tiet_luot_choi::find($id);
         return view('ChiTietLuotChoi.form',compact('ChiTietLuotChoi'));
     }
 
@@ -77,7 +77,7 @@ class ChiTietLuotChoiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $ChiTietLuotChoi=ChiTietLuotChoi::find($id);
+        $ChiTietLuotChoi=chi_tiet_luot_choi::find($id);
         $ChiTietLuotChoi->luot_choi_id=$request->luot_choi_id;
         $ChiTietLuotChoi->cau_hoi_id=$request->cau_hoi_id;
         $ChiTietLuotChoi->phuong_an=$request->phuong_an;
@@ -94,7 +94,7 @@ class ChiTietLuotChoiController extends Controller
      */
     public function destroy($id)
     {
-        $ChiTietLuotChoi=ChiTietLuotChoi::find($id);
+        $ChiTietLuotChoi=chi_tiet_luot_choi::find($id);
         $ChiTietLuotChoi->delete();
         
         return redirect()->route('ChiTietLuotChoi.danh-sach');

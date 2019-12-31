@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\CauHoi;
-use App\LinhVuc;
+use App\cau_hoi;
+use App\linh_vuc;
 
 class CauHoiController extends Controller
 {
@@ -15,7 +15,7 @@ class CauHoiController extends Controller
      */
     public function index()
     {
-        $listCauHois = CauHoi::all();
+        $listCauHois = cau_hoi::all();
         return view('cau-hoi.danh-sach-2', compact('listCauHois'));
     }
 
@@ -26,7 +26,7 @@ class CauHoiController extends Controller
      */
     public function create()
     {
-        $listLinhVuc = LinhVuc::all();
+        $listLinhVuc = linh_vuc::all();
         return view('cau-hoi.form', compact('listLinhVuc'));
     }
 
@@ -38,7 +38,7 @@ class CauHoiController extends Controller
      */
     public function store(Request $request)
     {
-        $cauHoi = new CauHoi;
+        $cauHoi = new cau_hoi;
         $cauHoi->noi_dung = $request->noi_dung;
         $cauHoi->linh_vuc_id = $request->linh_vuc;
         $cauHoi->phuong_an_a = $request->phuong_an_a;
@@ -70,8 +70,8 @@ class CauHoiController extends Controller
      */
     public function edit($id)
     {
-        $cauHoi = CauHoi::find($id);
-        $listLinhVuc = LinhVuc::all();
+        $cauHoi = cau_hoi::find($id);
+        $listLinhVuc = linh_vuc::all();
         return view('cau-hoi.form', compact('cauHoi', 'listLinhVuc'));
     }
 
@@ -84,7 +84,7 @@ class CauHoiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cauHoi = CauHoi::find($id);
+        $cauHoi = cau_hoi::find($id);
         $cauHoi->noi_dung = $request->noi_dung;
         $cauHoi->linh_vuc_id = $request->linh_vuc;
         $cauHoi->phuong_an_a = $request->phuong_an_a;
@@ -105,7 +105,7 @@ class CauHoiController extends Controller
      */
     public function destroy($id)
     {
-        $cauHoi = CauHoi::find($id);
+        $cauHoi = cau_hoi::find($id);
         $cauHoi->delete();
 
         return redirect()->route('cau-hoi.danh-sach');

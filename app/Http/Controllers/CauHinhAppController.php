@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\CauHinhApp;
+use App\cau_hinh_app;
 
 class CauHinhAppController extends Controller
 {
@@ -14,7 +14,7 @@ class CauHinhAppController extends Controller
      */
     public function index()
     {
-        $listCauHinhApp = CauHinhApp::all();
+        $listCauHinhApp = cau_hinh_app::all();
         return view('CauHinhApp.danh-sach', compact('listCauHinhApp'));
     }
 
@@ -36,7 +36,7 @@ class CauHinhAppController extends Controller
      */
     public function store(Request $request)
     {
-        $CauHinhApp=new CauHinhApp;
+        $CauHinhApp=new cau_hinh_app;
         $CauHinhApp->cau_hoi_sai=$request->cau_hoi_sai;
         $CauHinhApp->thoi_gian_tra_loi=$request->thoi_gian_tra_loi;
        
@@ -63,7 +63,7 @@ class CauHinhAppController extends Controller
      */
     public function edit($id)
     {
-        $CauHinhApp = CauHinhApp::find($id);
+        $CauHinhApp = cau_hinh_app::find($id);
         return view('CauHinhApp.form', compact('CauHinhApp'));
     }
 
@@ -76,7 +76,7 @@ class CauHinhAppController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $CauHinhApp = CauHinhApp::find($id);
+        $CauHinhApp = cau_hinh_app::find($id);
         $CauHinhApp->cau_hoi_sai=$request->cau_hoi_sai;
         $CauHinhApp->thoi_gian_tra_loi=$request->thoi_gian_tra_loi;
        
@@ -93,7 +93,7 @@ class CauHinhAppController extends Controller
      */
     public function destroy($id)
     {
-        $CauHinhApp = CauHinhApp::find($id);
+        $CauHinhApp = cau_hinh_app::find($id);
         $CauHinhApp->delete();
 
         return redirect()->route('CauHinhApp.danh-sach');

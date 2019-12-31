@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\LuotChoi;
+use App\luot_choi;
 
 class LuotChoiController extends Controller
 {
@@ -14,7 +14,7 @@ class LuotChoiController extends Controller
      */
     public function index()
     {
-        $listLuotChoi = LuotChoi::all();
+        $listLuotChoi = luot_choi::all();
         return view('LuotChoi.danh-sach', compact('listLuotChoi'));
     }
 
@@ -36,7 +36,7 @@ class LuotChoiController extends Controller
      */
     public function store(Request $request)
     {
-        $LuotChoi=new LuotChoi;
+        $LuotChoi=new luot_choi;
         $LuotChoi->nguoi_choi_id=$request->nguoi_choi_id;
         $LuotChoi->so_cau=$request->so_cau;
         $LuotChoi->diem=$request->diem;
@@ -64,7 +64,7 @@ class LuotChoiController extends Controller
      */
     public function edit($id)
     {
-        $LuotChoi=LuotChoi::find($id);
+        $LuotChoi=luot_choi::find($id);
         return view('LuotChoi.form',compact('LuotChoi'));
     }
 
@@ -77,7 +77,7 @@ class LuotChoiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $LuotChoi=LuotChoi::find($id);
+        $LuotChoi=luot_choi::find($id);
         $LuotChoi->nguoi_choi_id=$request->nguoi_choi_id;
         $LuotChoi->so_cau=$request->so_cau;
         $LuotChoi->diem=$request->diem;
@@ -94,7 +94,7 @@ class LuotChoiController extends Controller
      */
     public function destroy($id)
     {
-        $LuotChoi=LuotChoi::find($id);
+        $LuotChoi=luot_choi::find($id);
         $LuotChoi->delete();
         
         return redirect()->route('LuotChoi.danh-sach');

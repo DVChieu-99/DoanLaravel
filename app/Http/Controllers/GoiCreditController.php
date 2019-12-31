@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\GoiCredit;
+use App\goi_credit;
 
 class GoiCreditController extends Controller
 {
@@ -14,7 +14,7 @@ class GoiCreditController extends Controller
      */
     public function index()
     {
-        $listGoiCredit = GoiCredit::all();
+        $listGoiCredit = goi_credit::all();
         return view('GoiCredit.danh-sach', compact('listGoiCredit'));
     }
 
@@ -36,7 +36,7 @@ class GoiCreditController extends Controller
      */
     public function store(Request $request)
     {
-        $goiCredit = new GoiCredit;
+        $goiCredit = new goi_credit;
         $goiCredit->ten_goi = $request->ten_goi;
         $goiCredit->credit=$request->credit;
         $goiCredit->so_tien=$request->so_tien;
@@ -64,7 +64,7 @@ class GoiCreditController extends Controller
      */
     public function edit($id)
     {
-        $goiCredit = GoiCredit::find($id);
+        $goiCredit = goi_credit::find($id);
         return view('GoiCredit.form', compact('goiCredit'));
     }
 
@@ -77,7 +77,7 @@ class GoiCreditController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $goiCredit = GoiCredit::find($id);
+        $goiCredit = goi_credit::find($id);
         $goiCredit ->ten_goi = $request->ten_goi;
         $goiCredit->credit=$request->credit;
         $goiCredit->so_tien=$request->so_tien;
@@ -94,7 +94,7 @@ class GoiCreditController extends Controller
      */
     public function destroy($id)
     {
-        $goiCredit = GoiCRedit::find($id);
+        $goiCredit = goi_credit::find($id);
         $goiCredit->delete();
 
         return redirect()->route('goi-credit.danh-sach')->with(['flash_message'=>'Xóa gói Credit thành công!']);;
