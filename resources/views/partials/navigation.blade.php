@@ -205,7 +205,7 @@
                         <ul class="navigation-menu">
 
                             <li class="has-submenu">
-                                <a href="{{route('TrangChu.trangchu')}}">
+                                <a href="{{route('trang-chu')}}">
                                     <i class="la la-dashboard"></i>Trang chủ<div class="arrow-down"></div></a>
                                 <!-- <ul class="submenu">
                                     <li>

@@ -24,11 +24,11 @@ Route::middleware('auth:web')->group(function(){
 		return view('TrangChu.trangchu');
 	})->name('trang-chu'); 
 
-	Route::prefix('trang-chu')->group(function() {
-		Route::name('TrangChu.')->group(function() {
-			Route::get('/','TrangChuController@index')->name('trangchu');
-		});
-	});	
+	// Route::prefix('trang-chu')->group(function() {
+	// 	Route::name('TrangChu.')->group(function() {
+	// 		Route::get('/','TrangChuController@index')->name('trangchu');
+	// 	});
+	// });	
 	Route::get('dang-xuat','QuanTriVienController@dangXuat')->name('dang-xuat');
 
 	Route::prefix('linh-vuc')->group(function() {

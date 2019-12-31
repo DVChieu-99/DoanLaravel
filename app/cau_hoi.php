@@ -5,9 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CauHoi extends Model
+class cau_hoi extends Model
 {
-   use SoftDeletes;
+    use SoftDeletes;
    protected $table = 'cau_hoi';
 
    public function linhVuc()
