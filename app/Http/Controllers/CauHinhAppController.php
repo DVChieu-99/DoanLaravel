@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\cau_hinh_app;
+use App\CauHinhApp;
 
 class CauHinhAppController extends Controller
 {
@@ -14,8 +14,8 @@ class CauHinhAppController extends Controller
      */
     public function index()
     {
-        $listCauHinhApp = cau_hinh_app::all();
-        return view('CauHinhApp.danh-sach', compact('listCauHinhApp'));
+        $listCauHinhApp = CauHinhApp::all();
+        return view('cau-hinh-app.danh-sach', compact('listCauHinhApp'));
     }
 
     /**
@@ -25,7 +25,7 @@ class CauHinhAppController extends Controller
      */
     public function create()
     {
-        return view('CauHinhApp.form');
+        return view('cau-hinh-app.form');
     }
 
     /**
@@ -36,12 +36,12 @@ class CauHinhAppController extends Controller
      */
     public function store(Request $request)
     {
-        $CauHinhApp=new cau_hinh_app;
-        $CauHinhApp->cau_hoi_sai=$request->cau_hoi_sai;
-        $CauHinhApp->thoi_gian_tra_loi=$request->thoi_gian_tra_loi;
-       
-        $CauHinhApp->save();
-        return redirect()->route('CauHinhApp.danh-sach');
+        $cauHinhApp = new CauHinhApp;
+        $cauHinhApp->co_hoi_sai = $request->co_hoi_sai;
+        $cauHinhApp->thoi_gian_tra_loi = $request->thoi_gian_tra_loi;
+        $cauHinhApp->save();
+
+        return redirect()->route('cau-hinh-app.danh-sach')->with(['flash_message' => 'Thêm cấu hình App thành công !']);
     }
 
     /**
@@ -63,8 +63,8 @@ class CauHinhAppController extends Controller
      */
     public function edit($id)
     {
-        $CauHinhApp = cau_hinh_app::find($id);
-        return view('CauHinhApp.form', compact('CauHinhApp'));
+        $cauHinhApp = CauHinhApp::find($id);
+        return view('cau-hinh-app.form', compact('cauHinhApp'));
     }
 
     /**
@@ -76,13 +76,12 @@ class CauHinhAppController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $CauHinhApp = cau_hinh_app::find($id);
-        $CauHinhApp->cau_hoi_sai=$request->cau_hoi_sai;
-        $CauHinhApp->thoi_gian_tra_loi=$request->thoi_gian_tra_loi;
-       
-        $CauHinhApp ->save();
+        $cauHinhApp = CauHinhApp::find($id);
+        $cauHinhApp->co_hoi_sai = $request->co_hoi_sai;
+        $cauHinhApp->thoi_gian_tra_loi = $request->thoi_gian_tra_loi;
+        $cauHinhApp->save();
 
-        return redirect()->route('CauHinhApp.danh-sach');
+        return redirect()->route('cau-hinh-app.danh-sach')->with(['flash_message' => 'Cập nhật cấu hình App thành công !']);
     }
 
     /**
@@ -93,9 +92,9 @@ class CauHinhAppController extends Controller
      */
     public function destroy($id)
     {
-        $CauHinhApp = cau_hinh_app::find($id);
-        $CauHinhApp->delete();
+        $cauHinhApp = CauHinhApp::find($id);
+        $cauHinhApp->delete();
 
-        return redirect()->route('CauHinhApp.danh-sach');
+        return redirect()->route('cau-hinh-app.danh-sach')->with(['flash_message'=> 'Xóa cấu hình App thành công !']);
     }
 }

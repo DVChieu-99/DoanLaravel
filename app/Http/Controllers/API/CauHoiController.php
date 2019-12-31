@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\CauHoi;
 
 class CauHoiController extends Controller
@@ -15,7 +15,7 @@ class CauHoiController extends Controller
 
     	$result = [
     		'success' => true,
-    		'data'    => $cauHoi
+    		'data' => $cauHoi
     	];
     	return response()->json($result);
     }

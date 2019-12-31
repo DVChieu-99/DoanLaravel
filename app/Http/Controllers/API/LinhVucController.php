@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\LinhVuc;
 
 class LinhVucController extends Controller
@@ -12,8 +12,8 @@ class LinhVucController extends Controller
     {
     	$listLinhVuc = LinhVuc::all()->random(4);
     	$result = [
-    		'success'	=> true,
-    		'data'		=> $listLinhVuc
+    		'success' => true,
+    		'data' => $listLinhVuc
     	];
     	return response()->json($result);
     }

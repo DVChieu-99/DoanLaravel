@@ -48,12 +48,12 @@
                                 @csrf
                                 <div class="form-group mb-3">
                                     <label for="ten_dang_nhap">Tên đăng nhập</label>
-                                    <input class="form-control" type="text" id="ten_dang_nhap" name="ten_dang_nhap">
+                                    <input class="form-control" type="text" id="ten_dang_nhap" name="ten_dang_nhap" required="Nhập tên đăng nhập...">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="mat_khau">Mật Khẩu</label>
-                                    <input class="form-control" type="password" required="" id="mat_khau" name="mat_khau">
+                                    <input class="form-control" type="password" required="" id="mat_khau" name="mat_khau" required="Nhập mật khẩu...">
                                 </div>
 
                                 <div class="form-group mb-3">

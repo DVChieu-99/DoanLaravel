@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\QuantriVien;
+use App\QuanTriVien;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,29 +14,34 @@ class QuanTriVienController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    protected $redirectTo ="linh-vuc";
+    protected $redirectTo ="trang-chu";
+
     public function dangNhap()
     {
         return view('dang-nhap');
     }
+
     public function xuLyDangNhap(Request $request)
     {
 
         $ten_dang_nhap = $request->ten_dang_nhap;
         $mat_khau = $request->mat_khau;
 
-        if(Auth::attempt(['ten_dang_nhap'=> $ten_dang_nhap,'password'=>$mat_khau])){
+        if(Auth::attempt(['ten_dang_nhap'=> $ten_dang_nhap,'password'=>$mat_khau]))
+        {
             return redirect()->route('trang-chu');
         }
-        else{
+  
             
-            return redirect()->route('dang-nhap');
-        }
+            return "dang nhap that bai";
+       
         
     }
+
     public function layThongTin(){
-        return Auth::id();
+        return Auth::user();
     }
+
     public function dangXuat(){
          Auth::logout();
          return redirect()->route('dang-nhap');
@@ -45,7 +50,7 @@ class QuanTriVienController extends Controller
     public function index()
     {
         $listQuanTriVien = QuanTriVien::all();
-        return view('QuanTriVien.danh-sach', compact('listQuanTriVien'));
+        return view('quan-tri-vien.danh-sach', compact('listQuanTriVien'));
     }
 
     /**
@@ -55,7 +60,7 @@ class QuanTriVienController extends Controller
      */
     public function create()
     {
-        return view('QuanTriVien.form');
+        return view('quan-tri-vien.form');
     }
 
     /**
@@ -66,12 +71,25 @@ class QuanTriVienController extends Controller
      */
     public function store(Request $request)
     {
-        $QuanTriVien=new QuanTriVien;
-        $QuanTriVien->ten_dang_nhap=$request->ten_dang_nhap;
-        $QuanTriVien->mat_khau=$request->mat_khau;
-        $QuanTriVien->ho_ten=$request->ho_ten;
-        $QuanTriVien->save();
-        return redirect()->route('QuanTriVien.danh-sach');
+        $this->validate($request, [
+            'ten_dang_nhap' => 'required|unique:quan_tri_vien',
+            'mat_khau' => 'required|max:20|min:6',
+            'ho_ten' => 'required'
+        ], [
+            'ten_dang_nhap.required' => 'Bạn chưa nhập tên đăng nhập',
+            'ten_dang_nhap.unique' => 'Tên đăng nhập đã tồn tại.',          
+            'mat_khau.required' => 'Bạn chưa nhập mật khẩu.',
+            'mat_khau.min' => 'Mật khẩu phải lớn hơn 6 kí tự.',
+            'mat_khau.max' => 'Mật khẩu phải nhỏ hơn 20 kí tự.',
+            'ho_ten.required' => 'Bạn chưa nhập họ và tên.'
+        ]);
+        $quantrivien = new QuanTriVien;
+        $quantrivien->ten_dang_nhap = $request->ten_dang_nhap;
+        $quantrivien->mat_khau = $request->mat_khau;
+        $quantrivien->ho_ten = $request->ho_ten;
+        $quantrivien->save();
+
+        return redirect()->route('quan-tri-vien.danh-sach')->with(['flash_message' => 'Thêm gói credit thành công !']);;
     }
 
     /**
@@ -93,8 +111,8 @@ class QuanTriVienController extends Controller
      */
     public function edit($id)
     {
-        $QuanTriVien = QuanTriVien::find($id);
-        return view('QuanTriVien.form', compact('QuanTriVien'));
+        $quantrivien = QuanTriVien::find($id);
+        return view('quan-tri-vien.form', compact('quantrivien'));
     }
 
     /**
@@ -106,12 +124,24 @@ class QuanTriVienController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $QuanTriVien=QuanTriVien::find($id);
-        $QuanTriVien->ten_dang_nhap=$request->ten_dang_nhap;
-        $QuanTriVien->mat_khau=$request->mat_khau;
-        $QuanTriVien->ho_ten=$request->ho_ten;
-        $QuanTriVien->save();
-        return redirect()->route('QuanTriVien.danh-sach')->with(['flash_message'=>'Cập nhật quản trị viên thành công!']);
+        $this->validate($request, [
+            'ten_dang_nhap' => 'required|unique:quan_tri_vien',
+            'mat_khau' => 'required|max:20|min:6',
+            'ho_ten' => 'required'
+        ], [
+            'ten_dang_nhap.required' => 'Bạn chưa nhập tên đăng nhập',
+            'ten_dang_nhap.unique' => 'Tên đăng nhập đã tồn tại.',         
+            'mat_khau.required' => 'Bạn chưa nhập mật khẩu.',
+            'mat_khau.min' => 'Mật khẩu phải lớn hơn 6 kí tự.',
+            'mat_khau.max' => 'Mật khẩu phải nhỏ hơn 20 kí tự.',
+            'ho_ten.required' => 'Bạn chưa nhập họ và tên.'
+        ]);
+        $quantrivien = QuanTriVien::find($id);
+        $quantrivien->ten_dang_nhap = $request->ten_dang_nhap;
+        $quantrivien->mat_khau = bcrypt($request->mat_khau);
+        $quantrivien->ho_ten = $request->ho_ten;
+        $quantrivien->save();
+        return redirect()->route('quan-tri-vien.danh-sach')->with(['flash_message' => 'Cập nhật quản trị thành công !']);
     }
 
     /**
@@ -122,9 +152,8 @@ class QuanTriVienController extends Controller
      */
     public function destroy($id)
     {
-        $QuanTriVien = QuanTriVien::find($id);
-        $QuanTriVien->delete();
-
-        return redirect()->route('QuanTriVien.danh-sach')->with(['flash_message'=>'Xóa quản trị viên thành công!']);
+        $quantrivien = QuanTriVien::find($id);
+        $quantrivien->delete();
+        return redirect()->route('quan-tri-vien.danh-sach')->with(['flash_message' => 'Xóa quản trị thành công !']);
     }
 }
