@@ -34,7 +34,7 @@
                                 <p class="text-muted mb-4 mt-3">Enter your email address and password to access admin panel.</p>
                             </div>
 
-                            <h5 class="auth-title">Đăng Nhập</h5>                            
+                            <h5 class="auth-title">Đăng Nhập</h5>
                         @if(count($errors)>0)
                         <div class="alert alert-danger">
                             <ul>
@@ -45,10 +45,12 @@
                         </div>
                         @endif
                                 @if(session('thongbao'))
-                                    {{session('thongbao')}}
+                                <div class="alert alert-danger">
+                                  {{session('thongbao')}}
+                                </div>        
                                 @endif
                             <form action="{{route('xu-ly-dang-nhap')}}" method="POST">
-                                
+
                                 @csrf
                                 <div class="form-group mb-3">
                                     <label for="ten_dang_nhap">Tên đăng nhập</label>
@@ -113,7 +115,7 @@
 
 
     <footer class="footer footer-alt">
-        2019 &copy; Upvex theme by <a href="" class="text-muted">Coderthemes</a> 
+        2019 &copy; Upvex theme by <a href="" class="text-muted">Coderthemes</a>
     </footer>
 
     <!-- Vendor js -->

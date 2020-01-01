@@ -94,7 +94,7 @@ class CauHoiController extends Controller
         $cauHoi->dap_an = $request->dap_an;
         $cauHoi ->save();
 
-        return redirect()->route('cau-hoi.danh-sach');
+        return redirect()->route('cau-hoi.danh-sach'->with(['flash_message'=>'Cập nhật câu hỏi thành công!']));
     }
 
     /**
@@ -108,6 +108,6 @@ class CauHoiController extends Controller
         $cauHoi = cau_hoi::find($id);
         $cauHoi->delete();
 
-        return redirect()->route('cau-hoi.danh-sach');
+        return redirect()->route('cau-hoi.danh-sach')->with(['flash_message'=>'Xóa câu hỏi thành công!']);
     }
 }

@@ -39,13 +39,13 @@ class QuanTriVienController extends Controller
 
             ]);
         if(Auth::attempt(['ten_dang_nhap'=> $ten_dang_nhap,'password'=>$mat_khau])){
-            return redirect()->route('trang-chu');
+            return redirect()->route('trang-chu')->with(['flash_message'=>'Đăng nhập thành công!']);
         }
         else{
-            
+
             return redirect()->route('dang-nhap')->with('thongbao','Đăng Nhập Thất Bại');
         }
-        
+
     }
     public function layThongTin(){
         return Auth::id();

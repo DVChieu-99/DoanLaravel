@@ -9,4 +9,7 @@ class linh_vuc extends Model
 {
     use SoftDeletes;
     protected $table = 'linh_vuc';
+    public function cauhoi(){
+      return $this->hasOne('App\cau_hoi');
+    }
 }

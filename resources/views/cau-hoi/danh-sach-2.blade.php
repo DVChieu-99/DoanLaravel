@@ -1,85 +1,95 @@
 @extends('layout')
 
-@section('css')
-<!-- Responsive Table css -->
-    <link href="{{ asset('assets/libs/rwd-table/rwd-table.min.css') }}" rel="stylesheet" type="text/css" />
-
-    <!-- App css -->
-    <link href="{{asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
-@endsection
-
-@section('js')
-
-    <!-- Right bar overlay-->
-    <div class="rightbar-overlay"></div>
-
-    <!-- Vendor js -->
-    <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
-
-    <!-- Responsive Table js -->
-    <script src="{{ asset('assets/libs/rwd-table/rwd-table.min.js') }}"></script>
-
-    <!-- App js-->
-    <script src="{{ asset('assets/js/app.min.js') }}"></script>
-@endsection
 
 @section('main-content')
-<div class="col-12">
-    <div class="card-box">
-        <div class="responsive-table-plugin">
-            <div class="table-wrapper">
-               
-                <div class="table-rep-plugin fixed-solution" data-pattern="priority-columns">
-                    <div class="table-responsive" data-pattern="priority-columns">
-                    <h4 class="header-title">Danh sách câu hỏi</h4>
-                                <a href="{{ route('cau-hoi.them-moi') }}" class="btn btn-primary waves-effect waves-light">Thêm Mới</a>  
-                                <br>
-                                <br>
-                        <table id="tech-companies-1" class="table table-striped">
-                            <thead>
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nội dung</th>
-                                        <th>Lĩnh vực</th>
-                                        <th>Phương án A</th>
-                                        <th>Phương án B</th>
-                                        <th>Phương án C</th>
-                                        <th>Phương án D</th>
-                                        <th>Đáp án</th>
-                                        <th>Sửa | Xóa</th>
-                                    </tr>
-                                </thead>  
-                            </thead>
-                            <tbody>
-                            @foreach($listCauHois as $cauHoi)
-                            <tr>
-                                <td data-org-colspan="1" data-columns="tech-companies-1-col-0">{{ $cauHoi->id }}</th>
-                                <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1" colspan="1">{{ $cauHoi->noi_dung }}</td>
-                                <td data-org-colspan="1" data-priority="3" data-columns="tech-companies-1-col-2" colspan="1">{{ $cauHoi->linhVuc->ten_linh_vuc }}</td>
-                                <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-3" colspan="1">{{ $cauHoi->phuong_an_a }}</td>
-                                <td data-org-colspan="1" data-priority="3" data-columns="tech-companies-1-col-4" colspan="1">{{ $cauHoi->phuong_an_b }}</td>
-                                <td data-org-colspan="1" data-priority="3" data-columns="tech-companies-1-col-5" colspan="1">{{ $cauHoi->phuong_an_c }}</td>
-                                <td data-org-colspan="1" data-priority="6" data-columns="tech-companies-1-col-6" colspan="1">{{ $cauHoi->phuong_an_d }}</td>
-                                <td data-org-colspan="1" data-priority="6" data-columns="tech-companies-1-col-7" colspan="1">{{ $cauHoi->dap_an }}</td>
-                                <td data-org-colspan="1" data-priority="6" data-columns="tech-companies-1-col-8" colspan="1">
-                                    <a href="{{ route('cau-hoi.cap-nhat', ['id' => $cauHoi->id]) }}" class="btn btn-success waves-effect waves-light"><i class="mdi mdi-pencil-minus"></i></a>
-                                    <a href="{{ route('cau-hoi.xoa', ['id' => $cauHoi->id]) }}" onclick="return confirm('Bạn có chắc muốn xóa')" class="btn btn-danger waves-effect waves-light"><i class=" mdi mdi-delete"></i></a>
-                                </td>
-                            </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- end .table-responsive -->
-                </div>
-            </div>
-            <!-- end .table-rep-plugin-->
-        </div>
-        <!-- end .responsive-table-plugin-->
-    </div>
-    <!-- end card-box -->
+<!-- TABLE HOVER -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <a href="{{route('cau-hoi.them-moi')}}" class="btn btn-primary waves-effect waves-light"> Thêm Mới </a>
+
+                <h4 class="header-title mt-3 mb-3">Danh Sách Câu Hỏi</h4>
+
+                    <table id="basic-datatable" class="table w-100">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nội Dung</th>
+                            <th>Lĩnh Vực</th>
+                            <th>Phương án a</th>
+                            <th>Phương án b</th>
+                            <th>Phương án c</th>
+                            <th>Phương án d</th>
+                            <th>Đáp an</th>
+                            <th>Thao tác</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($listCauHois as $cauHoi)
+                        <tr>
+                            <td>{{ $cauHoi->id }}</td>
+                            <td>{{ $cauHoi->noi_dung }}</td>
+                            <td>{{ $cauHoi->linhVuc->ten_linh_vuc }}</td>
+                            <td>{{ $cauHoi->phuong_an_a }}</td>
+                            <td>{{ $cauHoi->phuong_an_b }}</td>
+                            <td>{{ $cauHoi->phuong_an_c }}</td>
+                            <td>{{ $cauHoi->phuong_an_d }}</td>
+                            <td>{{ $cauHoi->dap_an }}</td>
+                            <td>
+                                <a href="{{ route('cau-hoi.cap-nhat', ['id' => $cauHoi->id]) }}" class="btn btn-info waves-effect waves-light"><i class="mdi mdi-pencil"></i></a>
+                                <a href="{{ route('cau-hoi.xoa', ['id' => $cauHoi->id]) }}" class="btn btn-danger waves-effect waves-light"><i class="fas fa-trash"></i></a></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
+            </div> <!-- end card body-->
+        </div> <!-- end card -->
+    </div><!-- end col-->
 </div>
-@endsection
+<!-- end row-->
+<!-- END TABLE HOVER -->
+@endsection('main-content')
+
+@section('css')
+<link href="{{ asset('assets/libs/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/libs/datatables/responsive.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/libs/datatables/buttons.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/libs/datatables/select.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+@endsection('css')
+
+@section('js')
+<!-- third party js -->
+<script src="{{ asset('assets/libs/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/libs/datatables/dataTables.bootstrap4.js') }}"></script>
+<script src="{{ asset('assets/libs/datatables/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('assets/libs/datatables/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/libs/datatables/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('assets/libs/datatables/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('assets/libs/datatables/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('assets/libs/datatables/buttons.flash.min.js') }}"></script>
+<script src="{{ asset('assets/libs/datatables/buttons.print.min.js') }}"></script>
+<script src="{{ asset('assets/libs/datatables/dataTables.keyTable.min.js') }}"></script>
+<script src="{{ asset('assets/libs/datatables/dataTables.select.min.js') }}"></script>
+<script src="{{ asset('assets/libs/pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('assets/libs/pdfmake/vfs_fonts.js') }}"></script>
+<!-- third party js ends -->
+
+<!-- Datatables init -->
+<script type="text/javascript">
+	$(document).ready(function(){$("#basic-datatable").DataTable({
+		language:
+        {
+            paginate:{
+			previous:"<i class='mdi mdi-chevron-left'>",next:"<i class='mdi mdi-chevron-right'>"
+		}
+	},
+	drawCallback:function()
+		{$(".dataTables_paginate > .pagination").addClass("pagination-rounded")
+	}
+});
+});
+</script>
+@endsection('js')
