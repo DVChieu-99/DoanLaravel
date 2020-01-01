@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\CauHoi;
-use App\LinhVuc;
+use App\cau_hoi;
+use App\linh_vuc;
 
 class CauHoiController extends Controller
 {
@@ -15,8 +15,8 @@ class CauHoiController extends Controller
      */
     public function index()
     {
-        $listCauHoi = CauHoi::all();
-        return view('cau-hoi.danh-sach', compact('listCauHoi'));
+        $listCauHois = cau_hoi::all();
+        return view('cau-hoi.danh-sach-2', compact('listCauHois'));
     }
 
     /**
@@ -26,7 +26,7 @@ class CauHoiController extends Controller
      */
     public function create()
     {
-        $listLinhVuc = LinhVuc::all();
+        $listLinhVuc = linh_vuc::all();
         return view('cau-hoi.form', compact('listLinhVuc'));
     }
 
@@ -38,17 +38,17 @@ class CauHoiController extends Controller
      */
     public function store(Request $request)
     {
-        $cauHoi = new CauHoi;
+        $cauHoi = new cau_hoi;
         $cauHoi->noi_dung = $request->noi_dung;
         $cauHoi->linh_vuc_id = $request->linh_vuc;
         $cauHoi->phuong_an_a = $request->phuong_an_a;
         $cauHoi->phuong_an_b = $request->phuong_an_b;
         $cauHoi->phuong_an_c = $request->phuong_an_c;
-        $cauHoi->phuong_an_d = $request->phuong_an_d;
+        $cauHoi->phuong_an_d= $request->phuong_an_d;
         $cauHoi->dap_an = $request->dap_an;
         $cauHoi->save();
 
-        return redirect()->route('cau-hoi.danh-sach')->with(['flash_message' => 'Thêm câu hỏi thành công !']);;
+        return redirect()->route('cau-hoi.danh-sach');
     }
 
     /**
@@ -70,9 +70,9 @@ class CauHoiController extends Controller
      */
     public function edit($id)
     {
-        $cauHoi = CauHoi::find($id);
-        $listLinhVuc = LinhVuc::all();
-        return view('cau-hoi.form', compact('cauHoi','listLinhVuc'));
+        $cauHoi = cau_hoi::find($id);
+        $listLinhVuc = linh_vuc::all();
+        return view('cau-hoi.form', compact('cauHoi', 'listLinhVuc'));
     }
 
     /**
@@ -84,17 +84,17 @@ class CauHoiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cauHoi = CauHoi::find($id);
+        $cauHoi = cau_hoi::find($id);
         $cauHoi->noi_dung = $request->noi_dung;
         $cauHoi->linh_vuc_id = $request->linh_vuc;
         $cauHoi->phuong_an_a = $request->phuong_an_a;
         $cauHoi->phuong_an_b = $request->phuong_an_b;
         $cauHoi->phuong_an_c = $request->phuong_an_c;
-        $cauHoi->phuong_an_d = $request->phuong_an_d;
+        $cauHoi->phuong_an_d= $request->phuong_an_d;
         $cauHoi->dap_an = $request->dap_an;
-        $cauHoi->save();
+        $cauHoi ->save();
 
-        return redirect()->route('cau-hoi.danh-sach')->with(['flash_message' => 'Cập nhật câu hỏi thành công !']);;
+        return redirect()->route('cau-hoi.danh-sach');
     }
 
     /**
@@ -105,9 +105,9 @@ class CauHoiController extends Controller
      */
     public function destroy($id)
     {
-        $cauHoi = CauHoi::find($id);
+        $cauHoi = cau_hoi::find($id);
         $cauHoi->delete();
 
-        return redirect()->route('cau-hoi.danh-sach')->with(['flash_message' => 'Xóa câu hỏi thành công !']);;
+        return redirect()->route('cau-hoi.danh-sach');
     }
 }

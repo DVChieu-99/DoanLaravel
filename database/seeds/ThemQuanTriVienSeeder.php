@@ -11,10 +11,15 @@ class ThemQuanTriVienSeeder extends Seeder
      */
     public function run()
     {
-          App\QuanTriVien::create([
+        App\QuanTriVien::create([
         	'ten_dang_nhap'=>'admin',
         	'mat_khau'=>Hash::make('123456'),
         	'ho_ten'=>'Quan Tri Vien'
+        ]);
+        App\QuanTriVien::create([
+            'ten_dang_nhap'=>'minhnhat',
+            'mat_khau'=>Hash::make('123456'),
+            'ho_ten'=>'Lý Minh Nhật'
         ]);
     }
 }

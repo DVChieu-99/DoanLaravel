@@ -24,15 +24,14 @@ class LinhVucRequest extends FormRequest
     public function rules()
     {
         return [
-            "ten_linh_vuc" => 'required|unique:linh_vuc'
+            'ten_linh_vuc'=> 'required|unique:linh_vuc'
         ];
     }
-
     public function messages()
     {
         return[
-            'ten_linh_vuc.required' => 'Chưa nhập tên lĩnh vực',
-            'ten_linh_vuc.unique' => 'Tên lĩnh vực đã tồn tại'
+            'ten_linh_vuc.required'=> 'Chưa nhập tên lĩnh vực',
+            'ten_linh_vuc.unique'=>'Tên lĩnh vực đã tồn tại'    
         ];
     }
 }
