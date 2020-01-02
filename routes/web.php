@@ -12,7 +12,8 @@
 */
 
 Route::get('test','QuanTriVienController@layThongTin');
-Route::middleware('guest:web')->group(function(){	
+
+Route::middleware('guest:web')->group(function(){
 	Route::get('dang-nhap','QuanTriVienController@dangNhap')->name('dang-nhap');
 	Route::post('dang-nhap','QuanTriVienController@xuLyDangNhap')->name('xu-ly-dang-nhap');
 });
@@ -21,13 +22,13 @@ Route::middleware('auth:web')->group(function(){
 
 	Route::get('/', function () {
 		return view('TrangChu.trangchu');
-	})->name('trang-chu'); 
+	})->name('trang-chu');
 
 	// Route::prefix('trang-chu')->group(function() {
 	// 	Route::name('TrangChu.')->group(function() {
 	// 		Route::get('/','TrangChuController@index')->name('trangchu');
 	// 	});
-	// });	
+	// });
 	Route::get('dang-xuat','QuanTriVienController@dangXuat')->name('dang-xuat');
 
 	Route::prefix('linh-vuc')->group(function() {
@@ -38,6 +39,8 @@ Route::middleware('auth:web')->group(function(){
 			Route::get('cap-nhat/{id}','LinhVucController@edit')->name('cap-nhat');
 			Route::post('cap-nhat/{id}','LinhVucController@update')->name('xu-ly-cap-nhat');
 			Route::get('xoa/{id}','LinhVucController@destroy')->name('xoa');
+			Route::get('bin','LinhVucController@bin')->name('bin');
+			Route::get('restore/{id}','LinhVucController@restore')->name('restore');
 		});
 	});
 
@@ -48,6 +51,8 @@ Route::middleware('auth:web')->group(function(){
 			Route::get('them-moi','CauHoiController@create')->name('them-moi');
 			Route::post('them-moi','CauHoiController@store')->name('xu-ly-them-moi');
 			Route::get('cap-nhat/{id}','CauHoiController@edit')->name('cap-nhat');
+			Route::get('bin','CauHoiController@bin')->name('bin');
+			Route::get('restore/{id}','CauHoiController@restore')->name('restore');
 			Route::post('cap-nhat/{id}','CauHoiController@update')->name('xu-ly-cap-nhat');
 			Route::get('xoa/{id}','CauHoiController@destroy')->name('xoa');
 		});

@@ -1,15 +1,17 @@
 @extends('layout')
-
-
+@section('css')
+<link href="{{ asset('assets/libs/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/libs/datatables/responsive.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/libs/datatables/buttons.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/libs/datatables/select.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+@endsection('css')
 @section('main-content')
 <!-- TABLE HOVER -->
 <div class="row">
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <a href="{{route('linh-vuc.them-moi')}}" class="btn btn-primary waves-effect waves-light"> Thêm Mới </a>
-        <a href="{{route('linh-vuc.bin')}}">Khôi Phục Lĩnh Vực Đã Xóa</a>
-        <h4 class="header-title mt-3  mb-3">Danh Sách Lĩnh Vực</h4>
+        <h4 class="header-title mt-3  mb-3">Danh Sách Lĩnh Vực Đã Xóa</h4>
         <table id="basic-datatable-1" class="table dt-responsive nowrap">
           <thead>
             <tr>
@@ -19,13 +21,12 @@
             </tr>
           </thead>
           <tbody>
-            @foreach($listLinhVuc as $linhVuc)
+            @foreach($LVdelete as $linhVuc)
             <tr>
               <td>{{ $linhVuc->id }}</td>
               <td>{{ $linhVuc->ten_linh_vuc }}</td>
               <td>
-                <a href="{{ route('linh-vuc.cap-nhat', ['id' => $linhVuc->id]) }}" class="btn btn-info waves-effect waves-light"><i class="mdi mdi-pencil"></i></a>
-                <a href="{{ route('linh-vuc.xoa', ['id' => $linhVuc->id]) }}" class="btn btn-danger waves-effect waves-light"><i class="fas fa-trash"></i></a>
+                <a href="{{ route('linh-vuc.restore',$linhVuc->id) }}" class="btn btn-info waves-effect waves-light"><i class="fas fa-trash-restore"></i></a>
               </td>
             </tr>
             @endforeach
@@ -39,14 +40,6 @@
 <!-- end row-->
 <!-- END TABLE HOVER -->
 @endsection('main-content')
-
-@section('css')
-<link href="{{ asset('assets/libs/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('assets/libs/datatables/responsive.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('assets/libs/datatables/buttons.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('assets/libs/datatables/select.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
-@endsection('css')
-
 @section('js')
 <!-- third party js -->
 <script src="{{ asset('assets/libs/datatables/jquery.dataTables.min.js') }}"></script>
@@ -66,13 +59,13 @@
 
 <!-- Datatables init -->
 <script type="text/javascript">
-$(document).ready(function(){$("#basic-datatable-1").DataTable({
-  language:{paginate:{
-    previous:"<i class='mdi mdi-chevron-left'>",next:"<i class='mdi mdi-chevron-right'>"
-  }
-},
-drawCallback:function()
-{$(".dataTables_paginate > .pagination").addClass("pagination-rounded")
+    $(document).ready(function(){$("#basic-datatable-1").DataTable({
+        language:{paginate:{
+            previous:"<i class='mdi mdi-chevron-left'>",next:"<i class='mdi mdi-chevron-right'>"
+        }
+    },
+    drawCallback:function()
+  {$(".dataTables_paginate > .pagination").addClass("pagination-rounded")
 }
 });
 });

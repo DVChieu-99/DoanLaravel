@@ -16,7 +16,7 @@ class CauHoiController extends Controller
     public function index()
     {
         $listCauHois = cau_hoi::all();
-        return view('cau-hoi.danh-sach-2', compact('listCauHois'));
+        return view('cau-hoi.danh-sach', compact('listCauHois'));
     }
 
     /**
@@ -109,5 +109,13 @@ class CauHoiController extends Controller
         $cauHoi->delete();
 
         return redirect()->route('cau-hoi.danh-sach')->with(['flash_message'=>'Xóa câu hỏi thành công!']);
+    }
+    public function bin(){
+      $CHdelete = cau_hoi::onlyTrashed()->get();
+      return view('cau-hoi.restore',compact('CHdelete'));
+    }
+    public function restore($id){
+      cau_hoi::onlyTrashed()->where('id',$id)->restore();
+      return redirect()->route('cau-hoi.danh-sach');
     }
 }

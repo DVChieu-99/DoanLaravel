@@ -93,7 +93,15 @@ class LinhVucController extends Controller
     {
         $linhVuc = linh_vuc::find($id);
         $linhVuc->delete();
-
         return redirect()->route('linh-vuc.danh-sach')->with(['flash_message'=>'Xóa lĩnh vực thành công!']);
+    }
+    public function bin(){
+      $LVdelete = linh_vuc::onlyTrashed()->get();
+      return view('linh-vuc.restore', compact('LVdelete'));
+
+    }
+    public function restore($id){
+      linh_vuc::onlyTrashed()->where('id',$id)->restore();
+      return redirect()->route('linh-vuc.danh-sach')->with(['flash_message'=>'Khôi phục thành công']);
     }
 }

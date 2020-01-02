@@ -1,15 +1,18 @@
 @extends('layout')
-
-
+@section('css')
+<link href="{{ asset('assets/libs/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/libs/datatables/responsive.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/libs/datatables/buttons.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/libs/datatables/select.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+@endsection('css')
 @section('main-content')
 <!-- TABLE HOVER -->
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <a href="{{route('cau-hoi.them-moi')}}" class="btn btn-primary waves-effect waves-light"> Thêm Mới </a>
 
-                <h4 class="header-title mt-3 mb-3">Danh Sách Câu Hỏi</h4>
+                <h4 class="header-title mt-3 mb-3">Danh Sách Câu Hỏi Đã Xóa</h4>
 
                     <table id="basic-datatable" class="table w-100">
                     <thead>
@@ -22,12 +25,12 @@
                             <th>Phương án c</th>
                             <th>Phương án d</th>
                             <th>Đáp an</th>
-                            <th>Thao tác</th>
+                            <th></th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($listCauHois as $cauHoi)
+                        @foreach($CHdelete as $cauHoi)
                         <tr>
                             <td>{{ $cauHoi->id }}</td>
                             <td>{{ $cauHoi->noi_dung }}</td>
@@ -38,8 +41,8 @@
                             <td>{{ $cauHoi->phuong_an_d }}</td>
                             <td>{{ $cauHoi->dap_an }}</td>
                             <td>
-                                <a href="{{ route('cau-hoi.cap-nhat', ['id' => $cauHoi->id]) }}" class="btn btn-info waves-effect waves-light"><i class="mdi mdi-pencil"></i></a>
-                                <a href="{{ route('cau-hoi.xoa', ['id' => $cauHoi->id]) }}" class="btn btn-danger waves-effect waves-light"><i class="fas fa-trash"></i></a></td>
+                              <a href="{{ route('cau-hoi.restore',$cauHoi->id) }}" class="btn btn-info waves-effect waves-light"><i class="fas fa-trash-restore"></i></a>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -52,14 +55,6 @@
 <!-- end row-->
 <!-- END TABLE HOVER -->
 @endsection('main-content')
-
-@section('css')
-<link href="{{ asset('assets/libs/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('assets/libs/datatables/responsive.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('assets/libs/datatables/buttons.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('assets/libs/datatables/select.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
-@endsection('css')
-
 @section('js')
 <!-- third party js -->
 <script src="{{ asset('assets/libs/datatables/jquery.dataTables.min.js') }}"></script>
