@@ -102,6 +102,6 @@ class LinhVucController extends Controller
     }
     public function restore($id){
       linh_vuc::onlyTrashed()->where('id',$id)->restore();
-      return redirect()->route('linh-vuc.danh-sach')->with(['flash_message'=>'Khôi phục thành công']);
+      return redirect()->route('linh-vuc.bin')->with(['flash_message'=>'Khôi phục thành công']);
     }
 }

@@ -5,7 +5,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="header-title">Danh sách Gói Credit</h4>
-                                <a href="{{ route('goi-credit.them-moi') }}" class="btn btn-primary waves-effect waves-light">Thêm Mới</a>  
+                                <a href="{{ route('goi-credit.them-moi') }}" class="btn btn-primary waves-effect waves-light">Thêm Mới</a>
+                                <a href="{{route('goi-credit.bin')}}">Danh sách gói credit đã xóa</a>
                                 <br>
                                 <table id="Credit-table" class="table dt-responsive nowrap">
                                     <thead>
@@ -16,7 +17,7 @@
                                             <th>Số tiền</th>
                                             <th>Sửa | Xóa</th>
                                         </tr>
-                                    </thead>         
+                                    </thead>
                                    <tbody>
                                    @foreach($listGoiCredit as $Credit)
                                        <tr>
@@ -24,35 +25,26 @@
                                            <td>{{ $Credit->ten_goi }}</td>
                                            <td>{{ $Credit->credit }}</td>
                                            <td>{{ $Credit->so_tien }}</td>
-                                           <td> 
-                                           <!-- <a href="{{ route('goi-credit.cap-nhat', ['id' => $Credit->id]) }}" class="btn btn-success btn-rounded waves-effect waves-light"><i class="mdi mdi-pencil-minus"></i></a> -->
-<!--                                                 
-                                           <a href="{{ route('goi-credit.cap-nhat', ['id' => $Credit->id]) }}" class="btn btn-success waves-effect waves-light"><i class="mdi mdi-pencil-minus"></i></a>
-                                                
-                                                <a href="{{ route('goi-credit.xoa', ['id' => $Credit->id]) }}" onclick="return confirm('Bạn có chắc muốn xóa')" class="btn btn-danger waves-effect waves-light"><i class=" mdi mdi-delete"></i></a>
-                                             -->
+                                           <td>
                                              <a href="{{ route('goi-credit.cap-nhat', ['id' => $Credit->id]) }}" class="btn btn-success btn-rounded waves-effect waves-light"><i class="mdi mdi-pencil-minus"></i></a>
-                                                <!-- <a href="{{ route('goi-credit.xoa', ['id' => $Credit->id]) }}" onclick="return confirm('Bạn có chắc muốn xóa')" class="btn btn-danger waves-effect waves-light"><i class=" mdi mdi-delete"></i></a>
-                                            -->
-
-                                            <a onclick="del()" href="#" class="btn btn-outline-danger btn-rounded waves-effect waves-light"><i class="fe-trash-2"></i></a>
-                                <script>
-                                    function del() {
-                                        Swal.fire({
-                                            title: 'Bạn có chắc chắn xóa !',
-                                            type: 'warning',
-                                            showCancelButton: true,
-                                            confirmButtonColor: '#3085d6',
-                                            cancelButtonColor: '#d33',
-                                            confirmButtonText: 'Có',
-                                            cancelButtonText: 'không'
-                                        }).then((result) => {
-                                            if (result.value) {
-                                                open("{{route('goi-credit.xoa', ['id'=>$Credit->id])}}", "_self")
-                                            }
-                                        })
-                                    };
-                                </script>
+                                             <a onclick="del()" href="#" class="btn btn-outline-danger btn-rounded waves-effect waves-light"><i class="fe-trash-2"></i></a>
+                                              <script>
+                                                  function del() {
+                                                      Swal.fire({
+                                                          title: 'Bạn có chắc chắn xóa !',
+                                                          type: 'warning',
+                                                          showCancelButton: true,
+                                                          confirmButtonColor: '#3085d6',
+                                                          cancelButtonColor: '#d33',
+                                                          confirmButtonText: 'Có',
+                                                          cancelButtonText: 'không'
+                                                      }).then((result) => {
+                                                          if (result.value) {
+                                                              open("{{route('goi-credit.xoa', ['id'=>$Credit->id])}}", "_self")
+                                                          }
+                                                      })
+                                                  };
+                                              </script>
                                             </td>
                                         </tr>
                                      @endforeach

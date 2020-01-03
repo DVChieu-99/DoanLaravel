@@ -80,7 +80,7 @@ class QuanTriVienController extends Controller
     public function store(Request $request)
     {
         $QuanTriVien=new QuanTriVien;
-        $QuanTriVien->ten_dang_nhap=$request->ten_dang_nhap;
+        $QuanTriVien->ten_dang_nhap=$QTVname;
         $QuanTriVien->mat_khau=$request->mat_khau;
         $QuanTriVien->ho_ten=$request->ho_ten;
         $QuanTriVien->save();
@@ -120,7 +120,7 @@ class QuanTriVienController extends Controller
     public function update(Request $request, $id)
     {
         $QuanTriVien=QuanTriVien::find($id);
-        $QuanTriVien->ten_dang_nhap=$request->ten_dang_nhap;
+        // $QuanTriVien->ten_dang_nhap=$request->ten_dang_nhap;
         $QuanTriVien->mat_khau=$request->mat_khau;
         $QuanTriVien->ho_ten=$request->ho_ten;
         $QuanTriVien->save();
@@ -139,5 +139,13 @@ class QuanTriVienController extends Controller
         $QuanTriVien->delete();
 
         return redirect()->route('QuanTriVien.danh-sach')->with(['flash_message'=>'Xóa quản trị viên thành công!']);
+    }
+    public function bin(){
+      $QTVdelete = QuanTriVien::onlyTrashed()->get();
+      return view('QuanTriVien.restore',compact('QTVdelete'));
+    }
+    public function restore($id){
+      QuanTriVien::onlyTrashed()->where('id',$id)->restore();
+      return redirect()->route('QuanTriVien.bin')->with(['flash_message'=>'Khôi phục thành công']);
     }
 }

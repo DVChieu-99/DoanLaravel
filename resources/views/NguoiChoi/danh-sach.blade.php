@@ -5,7 +5,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="header-title">Danh sách người chơi</h4>
-                                <a href="{{ route('NguoiChoi.them-moi') }}" class="btn btn-primary waves-effect waves-light">Thêm Mới</a>  
+                                <a href="{{ route('NguoiChoi.them-moi') }}" class="btn btn-primary waves-effect waves-light">Thêm Mới</a>
+                                <a href="{{route('NguoiChoi.bin')}}">Danh sách người chơi đã xóa</a>
                                 <br>
                                 <br>
                                 <table id="nguoi-choi-table" class="table dt-responsive nowrap">
@@ -13,25 +14,25 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Tên đăng nhập</th>
-                                            <th>Mật khẩu</th>
+                                            <!-- <th>Mật khẩu</th> -->
                                             <th>Email</th>
                                             <th>Ảnh đại diện</th>
                                             <th>Điểm cao nhất </th>
                                             <th>Credit</th>
                                             <th>Sửa | Xóa</th>
                                         </tr>
-                                    </thead>         
+                                    </thead>
                                    <tbody>
                                         @foreach($listNguoiChoi as $NguoiChoi)
                                        <tr>
                                            <td>{{ $NguoiChoi->id }}</td>
                                            <td>{{ $NguoiChoi->ten_dang_nhap }}</td>
-                                           <td>{{ $NguoiChoi->mat_khau }}</td>
+                                           <!-- <td>{{ $NguoiChoi->mat_khau }}</td> -->
                                            <td>{{ $NguoiChoi->mail }}</td>
                                            <td>{{ $NguoiChoi->hinh_dai_dien }}</td>
                                            <td>{{ $NguoiChoi->diem_cao_nhat }}</td>
                                            <td>{{ $NguoiChoi->credit }}</td>
-                                           <td> 
+                                           <td>
                                                 <a href="{{ route('NguoiChoi.cap-nhat', ['id' => $NguoiChoi->id]) }}" class="btn btn-success btn-rounded waves-effect waves-light"><i class="mdi mdi-pencil-minus"></i></a>
                                                 <a onclick="del()" href="#" class="btn btn-outline-danger btn-rounded waves-effect waves-light"><i class="fe-trash-2"></i></a>
                                 <script>

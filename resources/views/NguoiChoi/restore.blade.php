@@ -4,51 +4,36 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">Danh sách Quản trị viên</h4>
-                                <a href="{{ route('QuanTriVien.them-moi') }}" class="btn btn-primary waves-effect waves-light">Thêm Mới</a>
-                                <a href="{{route('QuanTriVien.bin')}}">Danh sách quản trị viên đã xóa</a>
+                                <h4 class="header-title">Danh sách người chơi</h4>
+                                <a href="{{ route('NguoiChoi.them-moi') }}" class="btn btn-primary waves-effect waves-light">Thêm Mới</a>
                                 <br>
                                 <br>
-                                <table id="quan-tri-vien-table" class="table dt-responsive nowrap">
+                                <table id="nguoi-choi-table" class="table dt-responsive nowrap">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
                                             <th>Tên đăng nhập</th>
                                             <!-- <th>Mật khẩu</th> -->
-                                            <th>Họ Tên</th>
-                                            <th></th>
+                                            <th>Email</th>
+                                            <th>Ảnh đại diện</th>
+                                            <th>Điểm cao nhất </th>
+                                            <th>Credit</th>
+                                            <th>Khôi phục</th>
                                         </tr>
                                     </thead>
                                    <tbody>
-                                        @foreach($listQuanTriVien as $QuanTriVien)
+                                        @foreach($NCdelete as $NguoiChoi)
                                        <tr>
-                                           <td>{{ $QuanTriVien->id }}</td>
-                                           <td>{{ $QuanTriVien->ten_dang_nhap }}</td>
-                                           <!-- <td>{{ $QuanTriVien->mat_khau }}</td> -->
-                                           <td>{{ $QuanTriVien->ho_ten }}</td>
+                                           <td>{{ $NguoiChoi->id }}</td>
+                                           <td>{{ $NguoiChoi->ten_dang_nhap }}</td>
+                                           <!-- <td>{{ $NguoiChoi->mat_khau }}</td> -->
+                                           <td>{{ $NguoiChoi->mail }}</td>
+                                           <td>{{ $NguoiChoi->hinh_dai_dien }}</td>
+                                           <td>{{ $NguoiChoi->diem_cao_nhat }}</td>
+                                           <td>{{ $NguoiChoi->credit }}</td>
                                            <td>
-                                                <a href="{{ route('QuanTriVien.cap-nhat', ['id' => $QuanTriVien->id]) }}" class="btn btn-success btn-rounded waves-effect waves-light"><i class="mdi mdi-pencil-minus"></i></a>
-                                                <a onclick="del()" href="#" class="btn btn-outline-danger btn-rounded waves-effect waves-light"><i class="fe-trash-2"></i></a>
-                                <script>
-                                    function del() {
-                                        Swal.fire({
-                                            title: 'Bạn có chắc chắn xóa !',
-                                            type: 'warning',
-                                            showCancelButton: true,
-                                            confirmButtonColor: '#3085d6',
-                                            cancelButtonColor: '#d33',
-                                            confirmButtonText: 'Có',
-                                            cancelButtonText: 'không'
-                                        }).then((result) => {
-                                            if (result.value) {
-                                                open("{{route('QuanTriVien.xoa', ['id'=>$QuanTriVien->id])}}", "_self")
-                                            }
-                                        })
-                                    };
-                                </script>
-
-
-                                            </td>
+                                                <a href="{{ route('NguoiChoi.restore',$NguoiChoi->id) }}" class="btn btn-info waves-effect waves-light"><i class="fas fa-trash-restore"></i></a>
+                                          </td>
                                         </tr>
                                         @endforeach
                                    </tbody>
@@ -88,7 +73,7 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $("#quan-tri-vien-table").DataTable({
+        $("#nguoi-choi-table").DataTable({
             language:{paginate:{
                     previous:"<i class='mdi mdi-chevron-left'>",
                     next:"<i class='mdi mdi-chevron-right'>"

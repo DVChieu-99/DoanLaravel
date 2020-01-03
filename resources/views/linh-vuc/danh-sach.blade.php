@@ -15,7 +15,7 @@
             <tr>
               <th>ID</th>
               <th>Tên Lĩnh Vực</th>
-              <th></th>
+              <th>Sửa|Xóa</th>
             </tr>
           </thead>
           <tbody>
@@ -72,9 +72,11 @@ $(document).ready(function(){$("#basic-datatable-1").DataTable({
   }
 },
 drawCallback:function()
-{$(".dataTables_paginate > .pagination").addClass("pagination-rounded")
-}
+    {
+  $(".dataTables_paginate > .pagination").addClass("pagination-rounded")
+      }
+  });
 });
-});
+//
 </script>
 @endsection('js')

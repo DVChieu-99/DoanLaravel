@@ -65,6 +65,8 @@ Route::middleware('auth:web')->group(function(){
 			Route::get('cap-nhat/{id}','GoiCreditController@edit')->name('cap-nhat');
 			Route::post('cap-nhat/{id}','GoiCreditController@update')->name('xu-ly-cap-nhat');
 			Route::get('xoa/{id}','GoiCreditController@destroy')->name('xoa');
+			Route::get('bin','GoiCreditController@bin')->name('bin');
+			Route::get('restore/{id}','GoiCreditController@restore')->name('restore');
 		});
 	});
 
@@ -76,6 +78,8 @@ Route::middleware('auth:web')->group(function(){
 			Route::get('cap-nhat/{id}','NguoiChoiController@edit')->name('cap-nhat');
 			Route::post('cap-nhat/{id}','NguoiChoiController@update')->name('xu-ly-cap-nhat');
 			Route::get('xoa/{id}','NguoiChoiController@destroy')->name('xoa');
+			Route::get('bin','NguoiChoiController@bin')->name('bin');
+			Route::get('restore/{id}','NguoiChoiController@restore')->name('restore');
 		});
 	});
 
@@ -87,6 +91,8 @@ Route::middleware('auth:web')->group(function(){
 			Route::post('them-moi','QuanTriVienController@store')->name('xu-ly-them-moi');
 			Route::get('cap-nhat/{id}','QuanTriVienController@edit')->name('cap-nhat');
 			Route::post('cap-nhat/{id}','QuanTriVienController@update')->name('xu-ly-cap-nhat');
+			Route::get('bin','QuanTriVienController@bin')->name('bin');
+			Route::get('restore/{id}','QuanTriVienController@restore')->name('restore');
 			Route::get('xoa/{id}','QuanTriVienController@destroy')->name('xoa');
 		});
 	});

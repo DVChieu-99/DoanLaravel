@@ -94,7 +94,7 @@ class CauHoiController extends Controller
         $cauHoi->dap_an = $request->dap_an;
         $cauHoi ->save();
 
-        return redirect()->route('cau-hoi.danh-sach'->with(['flash_message'=>'Cập nhật câu hỏi thành công!']));
+        return redirect()->route('cau-hoi.danh-sach')->with(['flash_message'=>'Cập nhật câu hỏi thành công!']);
     }
 
     /**
@@ -116,6 +116,6 @@ class CauHoiController extends Controller
     }
     public function restore($id){
       cau_hoi::onlyTrashed()->where('id',$id)->restore();
-      return redirect()->route('cau-hoi.danh-sach');
+      return redirect()->route('cau-hoi.bin')->with(['flash_message'=>'Khôi phục thành công']);
     }
 }

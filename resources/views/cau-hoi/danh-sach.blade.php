@@ -39,7 +39,11 @@
                             <td>{{ $cauHoi->dap_an }}</td>
                             <td>
                                 <a href="{{ route('cau-hoi.cap-nhat', ['id' => $cauHoi->id]) }}" class="btn btn-info waves-effect waves-light"><i class="mdi mdi-pencil"></i></a>
-                                <a href="{{ route('cau-hoi.xoa', ['id' => $cauHoi->id]) }}" class="btn btn-danger waves-effect waves-light"><i class="fas fa-trash"></i></a></td>
+                                <!-- <a href="{{ route('cau-hoi.xoa', ['id' => $cauHoi->id]) }}" class="btn btn-danger waves-effect waves-light"><i class="fas fa-trash"></i></a> -->
+                                <a href="{{ route('cau-hoi.xoa', ['id' => $cauHoi->id]) }}" class="btn btn-danger waves-effect waves-light"><i class="fas fa-trash"></i></i></a>
+
+                              </td>
+
                         </tr>
                         @endforeach
                     </tbody>
@@ -91,5 +95,7 @@
 	}
 });
 });
+//
+
 </script>
 @endsection('js')

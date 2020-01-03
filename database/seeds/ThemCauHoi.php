@@ -271,7 +271,7 @@ class ThemCauHoi extends Seeder
           'phuong_an_a'=>'Facebook',
           'phuong_an_b'=>'Twitter',
           'phuong_an_c'=>'yahoo Plus',
-          'phuong_an_d'=>'',
+          'phuong_an_d'=>'Opera',
           'dap_an'=>'Facebook',
           'linh_vuc_id'=>'3'
         ]);

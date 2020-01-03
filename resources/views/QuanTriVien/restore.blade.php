@@ -6,7 +6,6 @@
                             <div class="card-body">
                                 <h4 class="header-title">Danh sách Quản trị viên</h4>
                                 <a href="{{ route('QuanTriVien.them-moi') }}" class="btn btn-primary waves-effect waves-light">Thêm Mới</a>
-                                <a href="{{route('QuanTriVien.bin')}}">Danh sách quản trị viên đã xóa</a>
                                 <br>
                                 <br>
                                 <table id="quan-tri-vien-table" class="table dt-responsive nowrap">
@@ -20,34 +19,14 @@
                                         </tr>
                                     </thead>
                                    <tbody>
-                                        @foreach($listQuanTriVien as $QuanTriVien)
+                                        @foreach($QTVdelete as $QuanTriVien)
                                        <tr>
                                            <td>{{ $QuanTriVien->id }}</td>
                                            <td>{{ $QuanTriVien->ten_dang_nhap }}</td>
                                            <!-- <td>{{ $QuanTriVien->mat_khau }}</td> -->
                                            <td>{{ $QuanTriVien->ho_ten }}</td>
                                            <td>
-                                                <a href="{{ route('QuanTriVien.cap-nhat', ['id' => $QuanTriVien->id]) }}" class="btn btn-success btn-rounded waves-effect waves-light"><i class="mdi mdi-pencil-minus"></i></a>
-                                                <a onclick="del()" href="#" class="btn btn-outline-danger btn-rounded waves-effect waves-light"><i class="fe-trash-2"></i></a>
-                                <script>
-                                    function del() {
-                                        Swal.fire({
-                                            title: 'Bạn có chắc chắn xóa !',
-                                            type: 'warning',
-                                            showCancelButton: true,
-                                            confirmButtonColor: '#3085d6',
-                                            cancelButtonColor: '#d33',
-                                            confirmButtonText: 'Có',
-                                            cancelButtonText: 'không'
-                                        }).then((result) => {
-                                            if (result.value) {
-                                                open("{{route('QuanTriVien.xoa', ['id'=>$QuanTriVien->id])}}", "_self")
-                                            }
-                                        })
-                                    };
-                                </script>
-
-
+                                                <a href="{{ route('QuanTriVien.restore',$QuanTriVien->id) }}" class="btn btn-info waves-effect waves-light"><i class="fas fa-trash-restore"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach

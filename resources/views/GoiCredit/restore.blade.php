@@ -4,53 +4,30 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="header-title">Danh sách Quản trị viên</h4>
-                                <a href="{{ route('QuanTriVien.them-moi') }}" class="btn btn-primary waves-effect waves-light">Thêm Mới</a>
-                                <a href="{{route('QuanTriVien.bin')}}">Danh sách quản trị viên đã xóa</a>
+                                <h4 class="header-title">Danh sách Gói Credit Đã Xóa</h4>
                                 <br>
-                                <br>
-                                <table id="quan-tri-vien-table" class="table dt-responsive nowrap">
+                                <table id="Credit-table" class="table dt-responsive nowrap">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Tên đăng nhập</th>
-                                            <!-- <th>Mật khẩu</th> -->
-                                            <th>Họ Tên</th>
+                                            <th>Tên gói</th>
+                                            <th>Credit</th>
+                                            <th>Số tiền</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                    <tbody>
-                                        @foreach($listQuanTriVien as $QuanTriVien)
+                                   @foreach($GCDdelete as $Credit)
                                        <tr>
-                                           <td>{{ $QuanTriVien->id }}</td>
-                                           <td>{{ $QuanTriVien->ten_dang_nhap }}</td>
-                                           <!-- <td>{{ $QuanTriVien->mat_khau }}</td> -->
-                                           <td>{{ $QuanTriVien->ho_ten }}</td>
+                                           <td>{{ $Credit->id }}</td>
+                                           <td>{{ $Credit->ten_goi }}</td>
+                                           <td>{{ $Credit->credit }}</td>
+                                           <td>{{ $Credit->so_tien }}</td>
                                            <td>
-                                                <a href="{{ route('QuanTriVien.cap-nhat', ['id' => $QuanTriVien->id]) }}" class="btn btn-success btn-rounded waves-effect waves-light"><i class="mdi mdi-pencil-minus"></i></a>
-                                                <a onclick="del()" href="#" class="btn btn-outline-danger btn-rounded waves-effect waves-light"><i class="fe-trash-2"></i></a>
-                                <script>
-                                    function del() {
-                                        Swal.fire({
-                                            title: 'Bạn có chắc chắn xóa !',
-                                            type: 'warning',
-                                            showCancelButton: true,
-                                            confirmButtonColor: '#3085d6',
-                                            cancelButtonColor: '#d33',
-                                            confirmButtonText: 'Có',
-                                            cancelButtonText: 'không'
-                                        }).then((result) => {
-                                            if (result.value) {
-                                                open("{{route('QuanTriVien.xoa', ['id'=>$QuanTriVien->id])}}", "_self")
-                                            }
-                                        })
-                                    };
-                                </script>
-
-
+                                              <a href="{{ route('goi-credit.restore',$Credit->id) }}" class="btn btn-info waves-effect waves-light"><i class="fas fa-trash-restore"></i></a>
                                             </td>
                                         </tr>
-                                        @endforeach
+                                     @endforeach
                                    </tbody>
                                 </table>
 
@@ -88,7 +65,7 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        $("#quan-tri-vien-table").DataTable({
+        $("#Credit-table").DataTable({
             language:{paginate:{
                     previous:"<i class='mdi mdi-chevron-left'>",
                     next:"<i class='mdi mdi-chevron-right'>"

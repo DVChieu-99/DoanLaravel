@@ -24,15 +24,15 @@
 
                                     <div class="form-group">
                                         <label for="ten_dang_nhap">Tên</label>
-                                        <input type="text" class="form-control" id="ten_dang_nhap" name="ten_dang_nhap" @if(isset($QuanTriVien)) value="{{ $QuanTriVien->ten_dang_nhap}}" @endif>
-                                    
+                                        <input disabled type="text" class="form-control"  id="ten_dang_nhap" name="ten_dang_nhap" @if(isset($QuanTriVien)) value="{{ $QuanTriVien->ten_dang_nhap}}" @endif>
+
                                         <label for="mat_khau">Mật khẩu</label>
-                                        <input type="text" class="form-control" id="mat_khau" name="mat_khau" @if(isset($QuanTriVien)) value="{{ $QuanTriVien->mat_khau}}" @endif>
-                                    
+                                        <input type="password" class="form-control" id="mat_khau" name="mat_khau" @if(isset($QuanTriVien)) value="{{ $QuanTriVien->mat_khau}}" @endif>
+
                                         <label for="ho_ten">Họ và tên</label>
                                         <input type="text" class="form-control" id="ho_ten" name="ho_ten" @if(isset($QuanTriVien)) value="{{ $QuanTriVien->ho_ten}}" @endif>
-                                    
-                                       
+
+
                                     </div>
                                     <button type="submit" class="btn btn-primary waves-effect waves-light">@if(isset($QuanTriVien)) Cập nhật @else Thêm @endif</button>
                                 </form>

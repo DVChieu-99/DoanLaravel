@@ -99,4 +99,12 @@ class GoiCreditController extends Controller
 
         return redirect()->route('goi-credit.danh-sach')->with(['flash_message'=>'Xóa gói Credit thành công!']);;
     }
+    public function bin(){
+      $GCDdelete = goi_credit::onlyTrashed()->get();
+      return view('GoiCredit.restore',compact('GCDdelete'));
+    }
+    public function restore($id){
+      goi_credit::onlyTrashed()->where('id',$id)->restore();
+      return redirect()->route('goi-credit.bin')->with(['flash_message'=>'Khôi phục thành công']);
+    }
 }

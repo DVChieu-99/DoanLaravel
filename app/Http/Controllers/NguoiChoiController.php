@@ -104,4 +104,12 @@ class NguoiChoiController extends Controller
 
         return redirect()->route('NguoiChoi.danh-sach')->with(['flash_message'=>'Xóa người chơi thành công!']);
     }
+    public function bin(){
+      $NCdelete = nguoi_choi::onlyTrashed()->get();
+      return view('NguoiChoi.restore',compact('NCdelete'));
+    }
+    public function restore($id){
+      nguoi_choi::onlyTrashed()->where('id',$id)->restore();
+      return redirect()->route('NguoiChoi.bin')->with(['flash_message'=>'Khôi phục thành công']);
+    }
 }
